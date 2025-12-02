@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Kebabs.Data;
+using Kebabs.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Kebabs.Services
 {
-    internal class RestaurantService
+    public class RestaurantService
     {
+        public List<Restaurant> GetRestaurants()
+        {
+            return InMemoryDatabase.Restaurants;
+        }
     }
 }
