@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Images/">
+    <File Path="../../../Downloads/adanakebab.png" />
+    <File Path="../../../Downloads/background.png" />
+    <File Path="../../../Downloads/donerdurum.png" />
+    <File Path="../../../Downloads/dynamicbg.jpg" />
+    <File Path="../../../Downloads/Dönericon.png" />
+    <File Path="../../../Downloads/lahmacun.png" />
+    <File Path="../../../Downloads/logo.jpg" />
+    <File Path="../../../Downloads/plate.png" />
+    <File Path="../../../Downloads/skermish.png" />
+    <File Path="../../../Downloads/veggie.png" />
+  </Folder>
+  <Project Path="Kebabs/Kebabs.csproj" />
+</Solution>
