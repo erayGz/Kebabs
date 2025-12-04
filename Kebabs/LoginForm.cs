@@ -32,7 +32,8 @@ namespace Kebabs
 
             // 2) Login with AuthService 
             var user = _authService.Login(username, password);
-            if (user == null) {
+            if (user == null)
+            {
                 MessageBox.Show("Please enter username and password.", "Login Failed",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -70,6 +71,11 @@ namespace Kebabs
 
             nextForm.Show();
             this.Hide();
+        }
+
+        private void Kebabs_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

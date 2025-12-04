@@ -1,4 +1,4 @@
-﻿namespace Kebabs
+namespace Kebabs
 {
     partial class Kebabs
     {
@@ -52,7 +52,6 @@
             pictureBox1.Size = new Size(210, 201);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // panel1
             // 
@@ -131,7 +130,6 @@
             lblPassword.Size = new Size(80, 23);
             lblPassword.TabIndex = 4;
             lblPassword.Text = "Password";
-            lblPassword.Click += lblPassword_Click;
             // 
             // txtUserName
             // 
@@ -156,7 +154,6 @@
             lblUsername.Size = new Size(160, 23);
             lblUsername.TabIndex = 2;
             lblUsername.Text = "User Name / E-mail";
-            lblUsername.Click += lblUsername_Click;
             // 
             // label1
             // 
@@ -184,7 +181,7 @@
             Name = "Kebabs";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kebab - Login Page";
-            Load += Form1_Load;
+            Load += Kebabs_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
