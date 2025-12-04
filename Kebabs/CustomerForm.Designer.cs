@@ -1,4 +1,4 @@
-﻿namespace Kebabs
+namespace Kebabs
 {
     partial class CustomerForm
     {
@@ -49,7 +49,7 @@
             grpMenu = new GroupBox();
             panelMenuButtons = new Panel();
             btnAddToCart = new Button();
-            numericUpDown1 = new NumericUpDown();
+            numQuantity = new NumericUpDown();
             dgvMenu = new DataGridView();
             lblSelectedRestaurant = new Label();
             grpCart = new GroupBox();
@@ -59,10 +59,6 @@
             lblTotalAmount = new Label();
             lblTotalText = new Label();
             dgvCart = new DataGridView();
-            FoodName = new DataGridViewTextBoxColumn();
-            UnitPrice = new DataGridViewTextBoxColumn();
-            Quantity = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitMain).BeginInit();
             splitMain.Panel1.SuspendLayout();
@@ -76,7 +72,7 @@
             splitRight.SuspendLayout();
             grpMenu.SuspendLayout();
             panelMenuButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvMenu).BeginInit();
             grpCart.SuspendLayout();
             panelCartBottom.SuspendLayout();
@@ -102,6 +98,7 @@
             btnLogout.TabIndex = 1;
             btnLogout.Text = "Log Out";
             btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
             // 
             // lblWelcome
             // 
@@ -151,6 +148,7 @@
             btnViewMenu.TabIndex = 2;
             btnViewMenu.Text = "View Menu";
             btnViewMenu.UseVisualStyleBackColor = true;
+            btnViewMenu.Click += btnViewMenu_Click;
             // 
             // dgvRestaurants
             // 
@@ -233,7 +231,7 @@
             // panelMenuButtons
             // 
             panelMenuButtons.Controls.Add(btnAddToCart);
-            panelMenuButtons.Controls.Add(numericUpDown1);
+            panelMenuButtons.Controls.Add(numQuantity);
             panelMenuButtons.Dock = DockStyle.Bottom;
             panelMenuButtons.Location = new Point(3, 320);
             panelMenuButtons.Name = "panelMenuButtons";
@@ -249,17 +247,17 @@
             btnAddToCart.TabIndex = 1;
             btnAddToCart.Text = "Add To Cart";
             btnAddToCart.UseVisualStyleBackColor = true;
+            btnAddToCart.Click += btnAddToCart_Click;
             // 
-            // numericUpDown1
+            // numQuantity
             // 
-            numericUpDown1.Dock = DockStyle.Left;
-            numericUpDown1.Location = new Point(0, 0);
-            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(150, 27);
-            numericUpDown1.TabIndex = 0;
-            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            numQuantity.Dock = DockStyle.Left;
+            numQuantity.Location = new Point(0, 0);
+            numQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numQuantity.Name = "numQuantity";
+            numQuantity.Size = new Size(150, 27);
+            numQuantity.TabIndex = 0;
+            numQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // dgvMenu
             // 
@@ -296,7 +294,6 @@
             dgvMenu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMenu.Size = new Size(667, 250);
             dgvMenu.TabIndex = 1;
-            dgvMenu.CellContentClick += dgvMenu_CellContentClick;
             // 
             // lblSelectedRestaurant
             // 
@@ -339,7 +336,7 @@
             btnRemoveItem.TabIndex = 3;
             btnRemoveItem.Text = "Remove Item";
             btnRemoveItem.UseVisualStyleBackColor = true;
-            btnRemoveItem.Click += button1_Click;
+            btnRemoveItem.Click += btnRemoveItem_Click;
             // 
             // btnConfirmOrder
             // 
@@ -350,6 +347,7 @@
             btnConfirmOrder.TabIndex = 2;
             btnConfirmOrder.Text = "Confirm Order";
             btnConfirmOrder.UseVisualStyleBackColor = true;
+            btnConfirmOrder.Click += btnConfirmOrder_Click;
             // 
             // lblTotalAmount
             // 
@@ -359,7 +357,7 @@
             lblTotalAmount.Name = "lblTotalAmount";
             lblTotalAmount.Size = new Size(53, 20);
             lblTotalAmount.TabIndex = 1;
-            lblTotalAmount.Text = "0.00 €";
+            lblTotalAmount.Text = "0.00 �";
             // 
             // lblTotalText
             // 
@@ -381,7 +379,6 @@
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
             dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dgvCart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCart.Columns.AddRange(new DataGridViewColumn[] { FoodName, UnitPrice, Quantity, Subtotal });
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = SystemColors.Window;
             dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
@@ -406,38 +403,6 @@
             dgvCart.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCart.Size = new Size(661, 200);
             dgvCart.TabIndex = 0;
-            // 
-            // FoodName
-            // 
-            FoodName.HeaderText = "Food Name";
-            FoodName.MinimumWidth = 6;
-            FoodName.Name = "FoodName";
-            FoodName.ReadOnly = true;
-            FoodName.Width = 125;
-            // 
-            // UnitPrice
-            // 
-            UnitPrice.HeaderText = "Unit Price";
-            UnitPrice.MinimumWidth = 6;
-            UnitPrice.Name = "UnitPrice";
-            UnitPrice.ReadOnly = true;
-            UnitPrice.Width = 125;
-            // 
-            // Quantity
-            // 
-            Quantity.HeaderText = "Quantity";
-            Quantity.MinimumWidth = 6;
-            Quantity.Name = "Quantity";
-            Quantity.ReadOnly = true;
-            Quantity.Width = 125;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.ReadOnly = true;
-            Subtotal.Width = 125;
             // 
             // CustomerForm
             // 
@@ -470,7 +435,7 @@
             grpMenu.ResumeLayout(false);
             grpMenu.PerformLayout();
             panelMenuButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvMenu).EndInit();
             grpCart.ResumeLayout(false);
             panelCartBottom.ResumeLayout(false);
@@ -494,14 +459,10 @@
         private Label lblSelectedRestaurant;
         private DataGridView dgvMenu;
         private Panel panelMenuButtons;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numQuantity;
         private Button btnAddToCart;
         private GroupBox grpCart;
         private DataGridView dgvCart;
-        private DataGridViewTextBoxColumn FoodName;
-        private DataGridViewTextBoxColumn UnitPrice;
-        private DataGridViewTextBoxColumn Quantity;
-        private DataGridViewTextBoxColumn Subtotal;
         private Panel panelCartBottom;
         private Button btnRemoveItem;
         private Button btnConfirmOrder;

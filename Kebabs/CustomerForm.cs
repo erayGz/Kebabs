@@ -1,4 +1,5 @@
-ï»¿using Kebabs.Models;
+using Kebabs.Models;
+using Kebabs.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,38 +13,133 @@ namespace Kebabs
     public partial class CustomerForm : Form
     {
         private readonly User _currentUser;
+        private readonly RestaurantService _restaurantService = new RestaurantService();
+        private readonly MenuService _menuService = new MenuService();
+        private readonly OrderService _orderService = new OrderService();
+
+        private int _selectedRestaurantId = -1;
+        private List<OrderItem> _cart = new List<OrderItem>();
+
+        private void RefreshCartGrid()
+        {
+            dgvCart.DataSource = null;
+            dgvCart.DataSource = _cart;
+
+            decimal total = _cart.Sum(x => x.Subtotal);
+            lblTotalAmount.Text = $"{total:0.00} €";
+        }
 
         public CustomerForm(User user)
         {
             InitializeComponent();
             _currentUser = user;
 
-            lblWelcome.Text = $"Welcome, {_currentUser.Username}";
-        }
-
-        private void grpMenu_Enter(object sender, EventArgs e)
-        {
 
         }
-
-        private void dgvMenu_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CustomerForm_Load(object sender, EventArgs e)
         {
+            lblWelcome.Text = $"Welcome, {_currentUser.Username}";
 
+            var restaurants = _restaurantService.GetRestaurants();
+            dgvRestaurants.DataSource = restaurants;
+        }
+
+        private void btnViewMenu_Click(object sender, EventArgs e)
+        {
+            if (dgvRestaurants.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a restaurant.");
+                return;
+            }
+
+            var restaurant = (Restaurant)dgvRestaurants.CurrentRow.DataBoundItem;
+            _selectedRestaurantId = restaurant.Id;
+
+            lblSelectedRestaurant.Text = $"Restaurant : {restaurant.Name}";
+
+            var menu = _menuService.GetMenu(restaurant.Id);
+            dgvMenu.DataSource = menu;
+
+            dgvMenu.ClearSelection();
+        }
+
+        private void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            if (dgvMenu.CurrentRow == null)
+            {
+                MessageBox.Show("Please Select a Food Item.");
+                return;
+            }
+
+            if (_selectedRestaurantId == -1)
+            {
+                MessageBox.Show("Please Select a restaurant first. ");
+                return;
+            }
+            Food food = (Food)dgvMenu.CurrentRow.DataBoundItem;
+
+            int quantity = (int)numQuantity.Value;
+
+            if (quantity <= 0)
+            {
+                MessageBox.Show("Quantity must be at least 1.");
+                return;
+            }
+
+            OrderItem item = new OrderItem
+            {
+                FoodName = food.Name,
+                UnitPrice = food.Price,
+                Quantity = quantity
+            };
+
+            _cart.Add(item);
+
+            RefreshCartGrid();
+        }
+
+
+
+        private void btnConfirmOrder_Click(object sender, EventArgs e)
+        {
+            if (_cart.Count == 0)
+            {
+                MessageBox.Show("Your cart is empty.");
+                return;
+            }
+            if (_selectedRestaurantId == -1)
+            {
+                MessageBox.Show("Please select a restaurant.");
+                return;
+            }
+
+            var order = _orderService.CreateOrder(_currentUser.Id, _selectedRestaurantId, _cart);
+
+            MessageBox.Show($"Your order has been placed successfully! \n Order ID: {order.Id}", "Order Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _cart.Clear();
+            RefreshCartGrid();
+        }
+
+        private void btnRemoveItem_Click(object sender, EventArgs e)
+        {
+            if (dgvCart.CurrentRow == null)
+            {
+                MessageBox.Show("Please select an item to remove.");
+                return;
+            }
+            var item = (OrderItem)dgvCart.CurrentRow.DataBoundItem;
+
+            _cart.Remove(item);
+
+            RefreshCartGrid();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            AppSession.CurrentUser = null;
+            var loginForm = new Kebabs();
+            loginForm.Show();
+            this.Close();
         }
     }
 }

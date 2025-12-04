@@ -67,7 +67,13 @@ namespace Kebabs
             }
 
             //Close Application When you close child  form
-            nextForm.FormClosed += (s, e) => this.Close();
+            nextForm.FormClosed += (s, e) =>{
+                //if user close the child form from the top x we can show the login form again (optional)
+                this.Show();
+                AppSession.CurrentUser = null;
+            }
+            ;
+
 
             nextForm.Show();
             this.Hide();
@@ -77,5 +83,14 @@ namespace Kebabs
         {
 
         }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Registration feature is not implemented yet.",
+                "Coming Soon",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
     }
 }
