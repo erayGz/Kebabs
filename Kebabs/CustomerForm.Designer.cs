@@ -47,22 +47,22 @@
             lblRestaurantsInfo = new Label();
             splitRight = new SplitContainer();
             grpMenu = new GroupBox();
+            panelMenuButtons = new Panel();
+            btnAddToCart = new Button();
+            numericUpDown1 = new NumericUpDown();
             dgvMenu = new DataGridView();
             lblSelectedRestaurant = new Label();
-            panelMenuButtons = new Panel();
-            numericUpDown1 = new NumericUpDown();
-            btnAddToCart = new Button();
             grpCart = new GroupBox();
+            panelCartBottom = new Panel();
+            btnRemoveItem = new Button();
+            btnConfirmOrder = new Button();
+            lblTotalAmount = new Label();
+            lblTotalText = new Label();
             dgvCart = new DataGridView();
             FoodName = new DataGridViewTextBoxColumn();
             UnitPrice = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
             Subtotal = new DataGridViewTextBoxColumn();
-            panelCartBottom = new Panel();
-            lblTotalText = new Label();
-            lblTotalAmount = new Label();
-            btnConfirmOrder = new Button();
-            btnRemoveItem = new Button();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitMain).BeginInit();
             splitMain.Panel1.SuspendLayout();
@@ -75,12 +75,12 @@
             splitRight.Panel2.SuspendLayout();
             splitRight.SuspendLayout();
             grpMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvMenu).BeginInit();
             panelMenuButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMenu).BeginInit();
             grpCart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCart).BeginInit();
             panelCartBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCart).BeginInit();
             SuspendLayout();
             // 
             // panelHeader
@@ -230,6 +230,37 @@
             grpMenu.TabStop = false;
             grpMenu.Text = "Menu";
             // 
+            // panelMenuButtons
+            // 
+            panelMenuButtons.Controls.Add(btnAddToCart);
+            panelMenuButtons.Controls.Add(numericUpDown1);
+            panelMenuButtons.Dock = DockStyle.Bottom;
+            panelMenuButtons.Location = new Point(3, 320);
+            panelMenuButtons.Name = "panelMenuButtons";
+            panelMenuButtons.Size = new Size(661, 27);
+            panelMenuButtons.TabIndex = 2;
+            // 
+            // btnAddToCart
+            // 
+            btnAddToCart.Dock = DockStyle.Right;
+            btnAddToCart.Location = new Point(567, 0);
+            btnAddToCart.Name = "btnAddToCart";
+            btnAddToCart.Size = new Size(94, 27);
+            btnAddToCart.TabIndex = 1;
+            btnAddToCart.Text = "Add To Cart";
+            btnAddToCart.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Dock = DockStyle.Left;
+            numericUpDown1.Location = new Point(0, 0);
+            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(150, 27);
+            numericUpDown1.TabIndex = 0;
+            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            // 
             // dgvMenu
             // 
             dgvMenu.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -276,37 +307,6 @@
             lblSelectedRestaurant.TabIndex = 0;
             lblSelectedRestaurant.Text = "Restaurant: -";
             // 
-            // panelMenuButtons
-            // 
-            panelMenuButtons.Controls.Add(btnAddToCart);
-            panelMenuButtons.Controls.Add(numericUpDown1);
-            panelMenuButtons.Dock = DockStyle.Bottom;
-            panelMenuButtons.Location = new Point(3, 320);
-            panelMenuButtons.Name = "panelMenuButtons";
-            panelMenuButtons.Size = new Size(661, 27);
-            panelMenuButtons.TabIndex = 2;
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Dock = DockStyle.Left;
-            numericUpDown1.Location = new Point(0, 0);
-            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(150, 27);
-            numericUpDown1.TabIndex = 0;
-            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
-            // 
-            // btnAddToCart
-            // 
-            btnAddToCart.Dock = DockStyle.Right;
-            btnAddToCart.Location = new Point(567, 0);
-            btnAddToCart.Name = "btnAddToCart";
-            btnAddToCart.Size = new Size(94, 27);
-            btnAddToCart.TabIndex = 1;
-            btnAddToCart.Text = "Add To Cart";
-            btnAddToCart.UseVisualStyleBackColor = true;
-            // 
             // grpCart
             // 
             grpCart.Controls.Add(panelCartBottom);
@@ -318,6 +318,57 @@
             grpCart.TabIndex = 0;
             grpCart.TabStop = false;
             grpCart.Text = "Cart";
+            // 
+            // panelCartBottom
+            // 
+            panelCartBottom.Controls.Add(btnRemoveItem);
+            panelCartBottom.Controls.Add(btnConfirmOrder);
+            panelCartBottom.Controls.Add(lblTotalAmount);
+            panelCartBottom.Controls.Add(lblTotalText);
+            panelCartBottom.Dock = DockStyle.Bottom;
+            panelCartBottom.Location = new Point(3, 283);
+            panelCartBottom.Name = "panelCartBottom";
+            panelCartBottom.Size = new Size(661, 60);
+            panelCartBottom.TabIndex = 1;
+            // 
+            // btnRemoveItem
+            // 
+            btnRemoveItem.Location = new Point(358, 15);
+            btnRemoveItem.Name = "btnRemoveItem";
+            btnRemoveItem.Size = new Size(128, 29);
+            btnRemoveItem.TabIndex = 3;
+            btnRemoveItem.Text = "Remove Item";
+            btnRemoveItem.UseVisualStyleBackColor = true;
+            btnRemoveItem.Click += button1_Click;
+            // 
+            // btnConfirmOrder
+            // 
+            btnConfirmOrder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnConfirmOrder.Location = new Point(492, 15);
+            btnConfirmOrder.Name = "btnConfirmOrder";
+            btnConfirmOrder.Size = new Size(157, 29);
+            btnConfirmOrder.TabIndex = 2;
+            btnConfirmOrder.Text = "Confirm Order";
+            btnConfirmOrder.UseVisualStyleBackColor = true;
+            // 
+            // lblTotalAmount
+            // 
+            lblTotalAmount.AutoSize = true;
+            lblTotalAmount.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblTotalAmount.Location = new Point(84, 19);
+            lblTotalAmount.Name = "lblTotalAmount";
+            lblTotalAmount.Size = new Size(53, 20);
+            lblTotalAmount.TabIndex = 1;
+            lblTotalAmount.Text = "0.00 €";
+            // 
+            // lblTotalText
+            // 
+            lblTotalText.AutoSize = true;
+            lblTotalText.Location = new Point(33, 19);
+            lblTotalText.Name = "lblTotalText";
+            lblTotalText.Size = new Size(45, 20);
+            lblTotalText.TabIndex = 0;
+            lblTotalText.Text = "Total:";
             // 
             // dgvCart
             // 
@@ -388,57 +439,6 @@
             Subtotal.ReadOnly = true;
             Subtotal.Width = 125;
             // 
-            // panelCartBottom
-            // 
-            panelCartBottom.Controls.Add(btnRemoveItem);
-            panelCartBottom.Controls.Add(btnConfirmOrder);
-            panelCartBottom.Controls.Add(lblTotalAmount);
-            panelCartBottom.Controls.Add(lblTotalText);
-            panelCartBottom.Dock = DockStyle.Bottom;
-            panelCartBottom.Location = new Point(3, 283);
-            panelCartBottom.Name = "panelCartBottom";
-            panelCartBottom.Size = new Size(661, 60);
-            panelCartBottom.TabIndex = 1;
-            // 
-            // lblTotalText
-            // 
-            lblTotalText.AutoSize = true;
-            lblTotalText.Location = new Point(33, 19);
-            lblTotalText.Name = "lblTotalText";
-            lblTotalText.Size = new Size(45, 20);
-            lblTotalText.TabIndex = 0;
-            lblTotalText.Text = "Total:";
-            // 
-            // lblTotalAmount
-            // 
-            lblTotalAmount.AutoSize = true;
-            lblTotalAmount.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblTotalAmount.Location = new Point(84, 19);
-            lblTotalAmount.Name = "lblTotalAmount";
-            lblTotalAmount.Size = new Size(53, 20);
-            lblTotalAmount.TabIndex = 1;
-            lblTotalAmount.Text = "0.00 €";
-            // 
-            // btnConfirmOrder
-            // 
-            btnConfirmOrder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnConfirmOrder.Location = new Point(492, 15);
-            btnConfirmOrder.Name = "btnConfirmOrder";
-            btnConfirmOrder.Size = new Size(157, 29);
-            btnConfirmOrder.TabIndex = 2;
-            btnConfirmOrder.Text = "Confirm Order";
-            btnConfirmOrder.UseVisualStyleBackColor = true;
-            // 
-            // btnRemoveItem
-            // 
-            btnRemoveItem.Location = new Point(358, 15);
-            btnRemoveItem.Name = "btnRemoveItem";
-            btnRemoveItem.Size = new Size(128, 29);
-            btnRemoveItem.TabIndex = 3;
-            btnRemoveItem.Text = "Remove Item";
-            btnRemoveItem.UseVisualStyleBackColor = true;
-            btnRemoveItem.Click += button1_Click;
-            // 
             // CustomerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -452,6 +452,7 @@
             Name = "CustomerForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kebabs Delivery - Customer";
+            Load += CustomerForm_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             splitMain.Panel1.ResumeLayout(false);
@@ -468,13 +469,13 @@
             splitRight.ResumeLayout(false);
             grpMenu.ResumeLayout(false);
             grpMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvMenu).EndInit();
             panelMenuButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMenu).EndInit();
             grpCart.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvCart).EndInit();
             panelCartBottom.ResumeLayout(false);
             panelCartBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCart).EndInit();
             ResumeLayout(false);
         }
 

@@ -34,7 +34,7 @@
             lnkForgetPw = new LinkLabel();
             btnRegister = new Button();
             btnLogin = new Button();
-            textBox1 = new TextBox();
+            txtPassword = new TextBox();
             lblPassword = new Label();
             txtUserName = new TextBox();
             lblUsername = new Label();
@@ -61,7 +61,7 @@
             panel1.Controls.Add(lnkForgetPw);
             panel1.Controls.Add(btnRegister);
             panel1.Controls.Add(btnLogin);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(txtPassword);
             panel1.Controls.Add(lblPassword);
             panel1.Controls.Add(txtUserName);
             panel1.Controls.Add(lblUsername);
@@ -109,16 +109,16 @@
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
             // 
-            // textBox1
+            // txtPassword
             // 
-            textBox1.BackColor = Color.White;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.ForeColor = Color.DimGray;
-            textBox1.Location = new Point(79, 113);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Password";
-            textBox1.Size = new Size(335, 27);
-            textBox1.TabIndex = 5;
+            txtPassword.BackColor = Color.White;
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.ForeColor = Color.DimGray;
+            txtPassword.Location = new Point(79, 113);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PlaceholderText = "Password";
+            txtPassword.Size = new Size(335, 27);
+            txtPassword.TabIndex = 5;
             // 
             // lblPassword
             // 
@@ -197,7 +197,7 @@
         private PictureBox pictureBox1;
         private Panel panel1;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txtPassword;
         private Label lblPassword;
         private TextBox txtUserName;
         private Button btnLogin;

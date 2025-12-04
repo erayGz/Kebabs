@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kebabs.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,14 @@ namespace Kebabs
 {
     public partial class CustomerForm : Form
     {
-        public CustomerForm()
+        private readonly User _currentUser;
+
+        public CustomerForm(User user)
         {
             InitializeComponent();
+            _currentUser = user;
+
+            lblWelcome.Text = $"Welcome, {_currentUser.Username}";
         }
 
         private void grpMenu_Enter(object sender, EventArgs e)
@@ -31,6 +37,11 @@ namespace Kebabs
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerForm_Load(object sender, EventArgs e)
         {
 
         }
