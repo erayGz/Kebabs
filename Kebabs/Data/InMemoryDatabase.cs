@@ -17,9 +17,9 @@ namespace Kebabs
         //Demo Data (for login)
         static InMemoryDatabase()
         {
-            Users.Add(new User { Id = 1, Username = "customer1", Password = "123", Role = "Customer" });
-            Users.Add(new User { Id = 2, Username = "rest1", Password = "123", Role = "Restaurant" });
-            Users.Add(new User { Id = 3, Username = "courier1", Password = "123", Role = "Courier" });
+            Users.Add(new User { Id = 1, Username = "customer1", Password = "123", Role = "Customer", Address = "Customer Street 1" });
+            Users.Add(new User { Id = 2, Username = "rest1", Password = "123", Role = "Restaurant",Address = "Azenes iela 5" });
+            Users.Add(new User { Id = 3, Username = "courier1", Password = "123", Role = "Courier" , Address = "Courier Base" });
 
             Restaurants.Add(new Restaurant { Id = 2, Name = "Turkebab", Address = "Azenes iela 5" });
             Foods.Add(new Food { Id = 1, RestaurantId = 2, Name = "Ankara Kebab", Price = 8.50m });

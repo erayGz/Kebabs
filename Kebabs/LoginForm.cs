@@ -81,10 +81,18 @@ namespace Kebabs
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Registration feature is not implemented yet.",
-                "Coming Soon",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (var registerForm = new RegisterForm())
+            {
+                var result = registerForm.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    MessageBox.Show("You can now log in with your new account.",
+                        "Registration Completed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
         }
         public void ClearLoginFields()
         {

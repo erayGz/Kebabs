@@ -29,14 +29,20 @@ namespace Kebabs.Services
                 Status = "Pending"
             };
             InMemoryDatabase.Orders.Add(order);
-            
+
+            var customer = InMemoryDatabase.Users.FirstOrDefault(u => u.Id == customerId);
+            var restaurant = InMemoryDatabase.Restaurants.FirstOrDefault(r => r.Id == restaurantId);
+            var courierUser = InMemoryDatabase.Users.FirstOrDefault(u => u.Role == "Courier");
+
+            int courierId = courierUser?.Id ?? 0;
+
             InMemoryDatabase.Deliveries.Add(new Delivery
             {
                 Id = InMemoryDatabase.Deliveries.Count + 1,
                 OrderId = order.Id,
-                CourierId = 3, // courier1 kullanıcısının Id'si (User listende ne ise onu yaz)
-                RestaurantAddress = "Kebab House, Main Street",
-                CustomerAddress = "Some Customer Address",
+                CourierId = courierId,
+                RestaurantAddress = restaurant?.Address ?? "Unknown Restaurant",
+                CustomerAddress = customer?.Address ?? "Unkown Customer",
                 Status = "Assigned"
             });
             return order;

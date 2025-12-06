@@ -20,6 +20,32 @@ namespace Kebabs
         private int _selectedRestaurantId = -1;
         private List<OrderItem> _cart = new List<OrderItem>();
 
+        private void ShowOrderNotifications()
+        {
+            var myOrders = InMemoryDatabase.Orders.Where(o => o.CustomerId == _currentUser.Id).ToList();
+            if (!myOrders.Any()) return;
+
+            var messages = new List<string>();
+            if (myOrders.Any(o => o.Status == "Rejected"))
+                messages.Add("Some of your orders were rejected by the restaurant.");
+
+            if (myOrders.Any(o => o.Status == "ReadyForPickup"))
+                messages.Add("One of your orders is ready at the restaurant.");
+
+            if (myOrders.Any(o => o.Status == "PickedUp"))
+                messages.Add("Courier has picked up your order.");
+
+            if (myOrders.Any(o => o.Status == "Delivered"))
+                messages.Add("Some of your orders have been delivered.");
+            if (messages.Count > 0)
+            {
+                MessageBox.Show(string.Join("\n", messages),
+                    "Order updates",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
         private void RefreshCartGrid()
         {
             dgvCart.DataSource = null;
@@ -42,7 +68,25 @@ namespace Kebabs
 
             var restaurants = _restaurantService.GetRestaurants();
             dgvRestaurants.DataSource = restaurants;
+            ShowOrderNotifications();
+
+            dgvRestaurants.AutoGenerateColumns = false;
+            dgvRestaurants.Columns.Clear();
+
+            dgvRestaurants.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Restaurant",
+                DataPropertyName = "Name"
+            });
+
+            dgvRestaurants.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Address",
+                DataPropertyName = "Address"
+            });
+
         }
+
 
         private void btnViewMenu_Click(object sender, EventArgs e)
         {

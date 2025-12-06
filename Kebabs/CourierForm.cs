@@ -14,6 +14,41 @@ namespace Kebabs
     {
         private readonly User _currentUser;
         private readonly DeliveryService _deliveryService = new DeliveryService();
+        private Delivery GetSelectedDelivery()
+        {
+            return dgvDeliveries.CurrentRow?.DataBoundItem as Delivery;
+        }
+        private void UpdateCourierButtons(string? status)
+        {
+            btnPickUp.Enabled = false;
+            btnDelivered.Enabled = false;
+
+            if (status == "ReadyForPickup")
+            {
+                btnPickUp.Enabled = true;      // if it is ready it can pickup
+            }
+            else if (status == "PickedUp")
+            {
+                btnDelivered.Enabled = true;   //only pickup after delivered
+            }
+        }
+        public void UpdateStatus(int deliveryId, string status)
+        {
+            var delivery = InMemoryDatabase.Deliveries
+                .FirstOrDefault(d => d.Id == deliveryId);
+
+            if (delivery == null)return;
+            delivery.Status = status;
+
+            if (status == "PickedUp" || status == "Delivered")
+            {
+                var order = InMemoryDatabase.Orders.FirstOrDefault(o => o.Id == delivery.OrderId);
+
+                if (order != null)order.Status = status;
+            }
+        }
+
+
         public CourierForm(User user)
         {
             InitializeComponent();
@@ -26,22 +61,46 @@ namespace Kebabs
         {
             lblCourierWelcome.Text = $"Welcome, {_currentUser.Username}";
             LoadDeliveries();
+
+            dgvDeliveries.AutoGenerateColumns = false;
+            dgvDeliveries.Columns.Clear();
+
+            dgvDeliveries.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Restaurant",
+                DataPropertyName = "RestaurantAddress"
+            });
+
+            dgvDeliveries.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Customer",
+                DataPropertyName = "CustomerAddress"
+            });
+
+            dgvDeliveries.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Status",
+                DataPropertyName = "Status"
+            });
+
         }
 
         private void LoadDeliveries()
         {
             var deliveries = _deliveryService.GetAssignmentDeliveries(_currentUser.Id);
+            var visible = deliveries.Where(d => d.Status != "Delivered").Where(d =>
+            {
+                var order = InMemoryDatabase.Orders.FirstOrDefault(o => o.Id == d.OrderId);
+                return order == null || order.Status != "Rejected";
+            }).ToList();
             dgvDeliveries.DataSource = deliveries;
             dgvDeliveries.ClearSelection();
         }
 
-
-
         private void dgvDeliveries_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvDeliveries.CurrentRow == null) return;
 
-            var delivery = dgvDeliveries.CurrentRow.DataBoundItem as Delivery;
+            var delivery = GetSelectedDelivery();
             if (delivery == null) return;
 
             lblDeliveryId.Text = $"Delivery: {delivery.Id}";
@@ -50,11 +109,11 @@ namespace Kebabs
             lblPickupAddress.Text = $"Pickup: {delivery.RestaurantAddress}";
             lblDropoffAddress.Text = $"Drop-off: {delivery.CustomerAddress}";
             lblStatus.Text = $"Status: {delivery.Status}";
+
+            UpdateCourierButtons(delivery.Status);
+
         }
-        private Delivery GetSelectedDelivery()
-        {
-            return dgvDeliveries.CurrentRow?.DataBoundItem as Delivery;
-        }
+
         private void btnPickUp_Click(object sender, EventArgs e)
         {
             var delivery = GetSelectedDelivery();
@@ -63,7 +122,11 @@ namespace Kebabs
                 MessageBox.Show("Please Select a Delivery. ");
                 return;
             }
-
+            if (delivery.Status != "ReadyForPickup")
+            {
+                MessageBox.Show("You can only pick up orders that are ready for pickup.");
+                return;
+            }
             _deliveryService.UpdateStatus(delivery.Id, "PickedUp");
             LoadDeliveries();
         }
@@ -76,8 +139,12 @@ namespace Kebabs
                 MessageBox.Show("Please Select a Delivery.");
                 return;
             }
-
-            _deliveryService.UpdateStatus(delivery.Id, "Delivered");
+            if (delivery.Status != "PickedUp")
+            {
+                MessageBox.Show("You can only mark orders as delivered after picking them up.");
+                return;
+            }
+                _deliveryService.UpdateStatus(delivery.Id, "Delivered");
             LoadDeliveries();
         }
         private void btnLogout_Click(object sender, EventArgs e)
