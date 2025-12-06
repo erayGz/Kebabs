@@ -137,9 +137,25 @@ namespace Kebabs
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AppSession.CurrentUser = null;
-            var loginForm = new Kebabs();
-            loginForm.Show();
-            this.Close();
+
+            // Açýk formlar arasýndan login formu bul
+            var loginForm = Application.OpenForms
+                .OfType<Kebabs>()
+                .FirstOrDefault();
+
+            if (loginForm != null)
+            {
+                loginForm.ClearLoginFields();   // username & þifreyi sil
+                loginForm.Show();               // login ekranýný geri getir
+            }
+            else
+            {
+                // Her ihtimale karþý login form yoksa yeni bir tane aç
+                var newLogin = new Kebabs();
+                newLogin.Show();
+            }
+
+            this.Close();   // þu anki (Customer/Restaurant/Courier) formu kapat
         }
     }
 }

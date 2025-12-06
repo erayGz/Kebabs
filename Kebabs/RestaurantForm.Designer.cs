@@ -1,4 +1,4 @@
-﻿namespace Kebabs
+namespace Kebabs
 {
     partial class RestaurantForm
     {
@@ -29,40 +29,36 @@
         private void InitializeComponent()
         {
             panelHeader = new Panel();
-            lblRestaurantWelcome = new Label();
-            btnLogout = new Button();
             lblStatusInfo = new Label();
+            btnLogout = new Button();
+            lblRestaurantWelcome = new Label();
             splitContainer1 = new SplitContainer();
             grpIncomingOrders = new GroupBox();
-            dgvOrders = new DataGridView();
             panel1 = new Panel();
             btnRefreshOrders = new Button();
+            dgvOrders = new DataGridView();
             grpOrderDetails = new GroupBox();
-            lblOrderId = new Label();
-            lblCustomer = new Label();
-            lblAddress = new Label();
-            lblOrderStatus = new Label();
-            dgvOrderItems = new DataGridView();
-            FoodName = new DataGridViewTextBoxColumn();
-            Quantity = new DataGridViewTextBoxColumn();
-            UnitPrice = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
             panelActions = new Panel();
-            btnAccept = new Button();
-            btnReject = new Button();
-            btnPreparing = new Button();
             btnReady = new Button();
+            btnPreparing = new Button();
+            btnReject = new Button();
+            btnAccept = new Button();
+            dgvOrderItems = new DataGridView();
+            lblOrderStatus = new Label();
+            lblAddress = new Label();
+            lblCustomer = new Label();
+            lblOrderId = new Label();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             grpIncomingOrders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvOrders).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvOrders).BeginInit();
             grpOrderDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvOrderItems).BeginInit();
             panelActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvOrderItems).BeginInit();
             SuspendLayout();
             // 
             // panelHeader
@@ -77,15 +73,14 @@
             panelHeader.Size = new Size(1182, 60);
             panelHeader.TabIndex = 0;
             // 
-            // lblRestaurantWelcome
+            // lblStatusInfo
             // 
-            lblRestaurantWelcome.AutoSize = true;
-            lblRestaurantWelcome.Font = new Font("Segoe UI", 14F);
-            lblRestaurantWelcome.Location = new Point(28, 15);
-            lblRestaurantWelcome.Name = "lblRestaurantWelcome";
-            lblRestaurantWelcome.Size = new Size(315, 32);
-            lblRestaurantWelcome.TabIndex = 0;
-            lblRestaurantWelcome.Text = "Welcome, [RestaurantName]";
+            lblStatusInfo.AutoSize = true;
+            lblStatusInfo.Location = new Point(529, 19);
+            lblStatusInfo.Name = "lblStatusInfo";
+            lblStatusInfo.Size = new Size(236, 20);
+            lblStatusInfo.TabIndex = 2;
+            lblStatusInfo.Text = "Incoming orders are shown below.";
             // 
             // btnLogout
             // 
@@ -96,15 +91,17 @@
             btnLogout.TabIndex = 1;
             btnLogout.Text = "Log Out";
             btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
             // 
-            // lblStatusInfo
+            // lblRestaurantWelcome
             // 
-            lblStatusInfo.AutoSize = true;
-            lblStatusInfo.Location = new Point(529, 19);
-            lblStatusInfo.Name = "lblStatusInfo";
-            lblStatusInfo.Size = new Size(236, 20);
-            lblStatusInfo.TabIndex = 2;
-            lblStatusInfo.Text = "Incoming orders are shown below.";
+            lblRestaurantWelcome.AutoSize = true;
+            lblRestaurantWelcome.Font = new Font("Segoe UI", 14F);
+            lblRestaurantWelcome.Location = new Point(28, 15);
+            lblRestaurantWelcome.Name = "lblRestaurantWelcome";
+            lblRestaurantWelcome.Size = new Size(315, 32);
+            lblRestaurantWelcome.TabIndex = 0;
+            lblRestaurantWelcome.Text = "Welcome, [RestaurantName]";
             // 
             // splitContainer1
             // 
@@ -135,20 +132,6 @@
             grpIncomingOrders.TabStop = false;
             grpIncomingOrders.Text = "Incoming Orders";
             // 
-            // dgvOrders
-            // 
-            dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOrders.Dock = DockStyle.Fill;
-            dgvOrders.Location = new Point(3, 23);
-            dgvOrders.MultiSelect = false;
-            dgvOrders.Name = "dgvOrders";
-            dgvOrders.ReadOnly = true;
-            dgvOrders.RowHeadersWidth = 51;
-            dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvOrders.Size = new Size(444, 567);
-            dgvOrders.TabIndex = 0;
-            // 
             // panel1
             // 
             panel1.Controls.Add(btnRefreshOrders);
@@ -167,6 +150,21 @@
             btnRefreshOrders.Text = "Refresh";
             btnRefreshOrders.UseVisualStyleBackColor = true;
             // 
+            // dgvOrders
+            // 
+            dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrders.Dock = DockStyle.Fill;
+            dgvOrders.Location = new Point(3, 23);
+            dgvOrders.MultiSelect = false;
+            dgvOrders.Name = "dgvOrders";
+            dgvOrders.ReadOnly = true;
+            dgvOrders.RowHeadersWidth = 51;
+            dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvOrders.Size = new Size(444, 567);
+            dgvOrders.TabIndex = 0;
+            dgvOrders.SelectionChanged += dgvOrders_SelectionChanged;
+            // 
             // grpOrderDetails
             // 
             grpOrderDetails.AutoSize = true;
@@ -184,83 +182,6 @@
             grpOrderDetails.TabStop = false;
             grpOrderDetails.Text = "Order Details";
             // 
-            // lblOrderId
-            // 
-            lblOrderId.AutoSize = true;
-            lblOrderId.Location = new Point(34, 39);
-            lblOrderId.Name = "lblOrderId";
-            lblOrderId.Size = new Size(60, 20);
-            lblOrderId.TabIndex = 0;
-            lblOrderId.Text = "Order: -";
-            // 
-            // lblCustomer
-            // 
-            lblCustomer.AutoSize = true;
-            lblCustomer.Location = new Point(34, 74);
-            lblCustomer.Name = "lblCustomer";
-            lblCustomer.Size = new Size(85, 20);
-            lblCustomer.TabIndex = 1;
-            lblCustomer.Text = "Customer: -";
-            // 
-            // lblAddress
-            // 
-            lblAddress.AutoSize = true;
-            lblAddress.Location = new Point(34, 110);
-            lblAddress.Name = "lblAddress";
-            lblAddress.Size = new Size(75, 20);
-            lblAddress.TabIndex = 2;
-            lblAddress.Text = "Address: -";
-            // 
-            // lblOrderStatus
-            // 
-            lblOrderStatus.AutoSize = true;
-            lblOrderStatus.Location = new Point(34, 142);
-            lblOrderStatus.Name = "lblOrderStatus";
-            lblOrderStatus.Size = new Size(109, 20);
-            lblOrderStatus.TabIndex = 3;
-            lblOrderStatus.Text = "Status: Pending";
-            // 
-            // dgvOrderItems
-            // 
-            dgvOrderItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvOrderItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOrderItems.Columns.AddRange(new DataGridViewColumn[] { FoodName, Quantity, UnitPrice, Subtotal });
-            dgvOrderItems.Location = new Point(-1, 172);
-            dgvOrderItems.Name = "dgvOrderItems";
-            dgvOrderItems.ReadOnly = true;
-            dgvOrderItems.RowHeadersWidth = 51;
-            dgvOrderItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvOrderItems.Size = new Size(726, 332);
-            dgvOrderItems.TabIndex = 4;
-            // 
-            // FoodName
-            // 
-            FoodName.HeaderText = "Food Name";
-            FoodName.MinimumWidth = 6;
-            FoodName.Name = "FoodName";
-            FoodName.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            Quantity.HeaderText = "Quantity";
-            Quantity.MinimumWidth = 6;
-            Quantity.Name = "Quantity";
-            Quantity.ReadOnly = true;
-            // 
-            // UnitPrice
-            // 
-            UnitPrice.HeaderText = "Unit Price";
-            UnitPrice.MinimumWidth = 6;
-            UnitPrice.Name = "UnitPrice";
-            UnitPrice.ReadOnly = true;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.ReadOnly = true;
-            // 
             // panelActions
             // 
             panelActions.Controls.Add(btnReady);
@@ -273,6 +194,36 @@
             panelActions.Size = new Size(722, 80);
             panelActions.TabIndex = 5;
             // 
+            // btnReady
+            // 
+            btnReady.Location = new Point(553, 25);
+            btnReady.Name = "btnReady";
+            btnReady.Size = new Size(160, 29);
+            btnReady.TabIndex = 3;
+            btnReady.Text = "Ready for Pickup";
+            btnReady.UseVisualStyleBackColor = true;
+            btnReady.Click += btnReady_Click;
+            // 
+            // btnPreparing
+            // 
+            btnPreparing.Location = new Point(366, 25);
+            btnPreparing.Name = "btnPreparing";
+            btnPreparing.Size = new Size(160, 29);
+            btnPreparing.TabIndex = 2;
+            btnPreparing.Text = "Mark as Preparing";
+            btnPreparing.UseVisualStyleBackColor = true;
+            btnPreparing.Click += btnPreparing_Click;
+            // 
+            // btnReject
+            // 
+            btnReject.Location = new Point(182, 25);
+            btnReject.Name = "btnReject";
+            btnReject.Size = new Size(160, 29);
+            btnReject.TabIndex = 1;
+            btnReject.Text = "Reject Order";
+            btnReject.UseVisualStyleBackColor = true;
+            btnReject.Click += btnReject_Click;
+            // 
             // btnAccept
             // 
             btnAccept.Location = new Point(3, 25);
@@ -283,32 +234,53 @@
             btnAccept.UseVisualStyleBackColor = true;
             btnAccept.Click += btnAccept_Click;
             // 
-            // btnReject
+            // dgvOrderItems
             // 
-            btnReject.Location = new Point(182, 25);
-            btnReject.Name = "btnReject";
-            btnReject.Size = new Size(160, 29);
-            btnReject.TabIndex = 1;
-            btnReject.Text = "Reject Order";
-            btnReject.UseVisualStyleBackColor = true;
+            dgvOrderItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOrderItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrderItems.Location = new Point(-1, 172);
+            dgvOrderItems.Name = "dgvOrderItems";
+            dgvOrderItems.ReadOnly = true;
+            dgvOrderItems.RowHeadersWidth = 51;
+            dgvOrderItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvOrderItems.Size = new Size(726, 332);
+            dgvOrderItems.TabIndex = 4;
             // 
-            // btnPreparing
+            // lblOrderStatus
             // 
-            btnPreparing.Location = new Point(366, 25);
-            btnPreparing.Name = "btnPreparing";
-            btnPreparing.Size = new Size(160, 29);
-            btnPreparing.TabIndex = 2;
-            btnPreparing.Text = "Mark as Preparing";
-            btnPreparing.UseVisualStyleBackColor = true;
+            lblOrderStatus.AutoSize = true;
+            lblOrderStatus.Location = new Point(34, 142);
+            lblOrderStatus.Name = "lblOrderStatus";
+            lblOrderStatus.Size = new Size(109, 20);
+            lblOrderStatus.TabIndex = 3;
+            lblOrderStatus.Text = "Status: Pending";
             // 
-            // btnReady
+            // lblAddress
             // 
-            btnReady.Location = new Point(553, 25);
-            btnReady.Name = "btnReady";
-            btnReady.Size = new Size(160, 29);
-            btnReady.TabIndex = 3;
-            btnReady.Text = "Ready for Pickup";
-            btnReady.UseVisualStyleBackColor = true;
+            lblAddress.AutoSize = true;
+            lblAddress.Location = new Point(34, 110);
+            lblAddress.Name = "lblAddress";
+            lblAddress.Size = new Size(75, 20);
+            lblAddress.TabIndex = 2;
+            lblAddress.Text = "Address: -";
+            // 
+            // lblCustomer
+            // 
+            lblCustomer.AutoSize = true;
+            lblCustomer.Location = new Point(34, 74);
+            lblCustomer.Name = "lblCustomer";
+            lblCustomer.Size = new Size(85, 20);
+            lblCustomer.TabIndex = 1;
+            lblCustomer.Text = "Customer: -";
+            // 
+            // lblOrderId
+            // 
+            lblOrderId.AutoSize = true;
+            lblOrderId.Location = new Point(34, 39);
+            lblOrderId.Name = "lblOrderId";
+            lblOrderId.Size = new Size(60, 20);
+            lblOrderId.TabIndex = 0;
+            lblOrderId.Text = "Order: -";
             // 
             // RestaurantForm
             // 
@@ -322,6 +294,7 @@
             Name = "RestaurantForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kebabs Delivery - Restaurant Panel";
+            Load += RestaurantForm_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
@@ -330,12 +303,12 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             grpIncomingOrders.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvOrders).EndInit();
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvOrders).EndInit();
             grpOrderDetails.ResumeLayout(false);
             grpOrderDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvOrderItems).EndInit();
             panelActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvOrderItems).EndInit();
             ResumeLayout(false);
         }
 
@@ -352,10 +325,6 @@
         private Button btnRefreshOrders;
         private GroupBox grpOrderDetails;
         private DataGridView dgvOrderItems;
-        private DataGridViewTextBoxColumn FoodName;
-        private DataGridViewTextBoxColumn Quantity;
-        private DataGridViewTextBoxColumn UnitPrice;
-        private DataGridViewTextBoxColumn Subtotal;
         private Label lblOrderStatus;
         private Label lblAddress;
         private Label lblCustomer;

@@ -1,7 +1,8 @@
-using Kebabs.Models;
+﻿using Kebabs.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Kebabs.Services
 {
@@ -9,6 +10,26 @@ namespace Kebabs.Services
     {
         public Order CreateOrder(int customerId, int restaurantId, List<OrderItem> items)
         {
+            var order = new Order
+            {
+                Id = InMemoryDatabase.Orders.Count + 1,
+                CustomerId = customerId,
+                RestaurantId = restaurantId,
+
+                // Copy of List
+                Items = items
+                    .Select(i => new OrderItem
+                    {
+                        FoodName = i.FoodName,
+                        UnitPrice = i.UnitPrice,
+                        Quantity = i.Quantity
+                    })
+                    .ToList(),
+
+                Status = "Pending"
+            };
+            InMemoryDatabase.Orders.Add(order);
+            return order;
             var newOrder = new Order
             {
                 Id = InMemoryDatabase.Orders.Count + 1,

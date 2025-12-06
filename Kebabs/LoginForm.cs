@@ -9,6 +9,7 @@ namespace Kebabs
         public Kebabs()
         {
             InitializeComponent();
+            txtPassword.UseSystemPasswordChar = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -66,17 +67,11 @@ namespace Kebabs
                     return;
             }
 
-            //Close Application When you close child  form
-            nextForm.FormClosed += (s, e) =>{
-                //if user close the child form from the top x we can show the login form again (optional)
-                this.Show();
-                AppSession.CurrentUser = null;
-            }
-            ;
 
 
-            nextForm.Show();
             this.Hide();
+            nextForm.Show();
+
         }
 
         private void Kebabs_Load(object sender, EventArgs e)
@@ -91,6 +86,12 @@ namespace Kebabs
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+        public void ClearLoginFields()
+        {
+            txtUserName.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+        }
+
 
     }
 }
