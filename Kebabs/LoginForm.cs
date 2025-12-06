@@ -92,6 +92,14 @@ namespace Kebabs
             txtPassword.Text = string.Empty;
         }
 
+        private void btnShowPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = false;  // show password
+        }
 
+        private void btnShowPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = true;  // hide password
+        }
     }
 }

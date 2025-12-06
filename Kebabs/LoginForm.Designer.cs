@@ -1,4 +1,4 @@
-namespace Kebabs
+﻿namespace Kebabs
 {
     partial class Kebabs
     {
@@ -31,6 +31,7 @@ namespace Kebabs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Kebabs));
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
+            btnShowPassword = new Button();
             lnkForgetPw = new LinkLabel();
             btnRegister = new Button();
             btnLogin = new Button();
@@ -57,6 +58,7 @@ namespace Kebabs
             // 
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.FromArgb(106, 106, 106);
+            panel1.Controls.Add(btnShowPassword);
             panel1.Controls.Add(lnkForgetPw);
             panel1.Controls.Add(btnRegister);
             panel1.Controls.Add(btnLogin);
@@ -69,6 +71,17 @@ namespace Kebabs
             panel1.Size = new Size(494, 269);
             panel1.TabIndex = 1;
             panel1.Paint += panel1_Paint;
+            // 
+            // btnShowPassword
+            // 
+            btnShowPassword.Location = new Point(382, 113);
+            btnShowPassword.Name = "btnShowPassword";
+            btnShowPassword.Size = new Size(32, 27);
+            btnShowPassword.TabIndex = 9;
+            btnShowPassword.Text = "👁";
+            btnShowPassword.UseVisualStyleBackColor = true;
+            btnShowPassword.MouseDown += btnShowPassword_MouseDown;
+            btnShowPassword.MouseUp += btnShowPassword_MouseUp;
             // 
             // lnkForgetPw
             // 
@@ -202,5 +215,6 @@ namespace Kebabs
         private Button btnRegister;
         private LinkLabel lnkForgetPw;
         private Label lblUsername;
+        private Button btnShowPassword;
     }
 }

@@ -16,14 +16,19 @@ namespace Kebabs.Services
         {
             var delivery = InMemoryDatabase.Deliveries.FirstOrDefault(d => d.Id == deliveryId)  ;
 
-            if (delivery == null) { 
-                delivery.Status = status;
+            if (delivery == null)
+                return;
 
-                if (status == "Delivered") {
-                    var order = InMemoryDatabase.Deliveries.FirstOrDefault(o => o.Id == delivery.OrderId) ;
-                    if (order != null)
-                        order.Status = "Delivered";
-                }
+            delivery.Status = status;
+
+            // if delivery successed update order status
+            if (status == "Delivered")
+            {
+                var order = InMemoryDatabase.Orders
+                    .FirstOrDefault(o => o.Id == delivery.OrderId);
+
+                if (order != null)
+                    order.Status = "Delivered";
             }
 
         }

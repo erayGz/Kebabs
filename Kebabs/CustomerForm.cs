@@ -138,24 +138,24 @@ namespace Kebabs
         {
             AppSession.CurrentUser = null;
 
-            // Açýk formlar arasýndan login formu bul
+            //Find login form from open forms
             var loginForm = Application.OpenForms
                 .OfType<Kebabs>()
                 .FirstOrDefault();
 
             if (loginForm != null)
             {
-                loginForm.ClearLoginFields();   // username & þifreyi sil
-                loginForm.Show();               // login ekranýný geri getir
+                loginForm.ClearLoginFields();   //Delete username and password
+                loginForm.Show();               //Bring back to login form
             }
             else
             {
-                // Her ihtimale karþý login form yoksa yeni bir tane aç
+                //if we dont have any login form open a new login form
                 var newLogin = new Kebabs();
                 newLogin.Show();
             }
 
-            this.Close();   // þu anki (Customer/Restaurant/Courier) formu kapat
+            this.Close();   // Close the form we are using
         }
     }
 }

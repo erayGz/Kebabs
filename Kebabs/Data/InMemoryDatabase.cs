@@ -18,12 +18,12 @@ namespace Kebabs
         static InMemoryDatabase()
         {
             Users.Add(new User { Id = 1, Username = "customer1", Password = "123", Role = "Customer" });
-            Users.Add(new User { Id = 1, Username = "rest1", Password = "123", Role = "Restaurant" });
-            Users.Add(new User { Id = 1, Username = "courier1", Password = "123", Role = "Courier" });
+            Users.Add(new User { Id = 2, Username = "rest1", Password = "123", Role = "Restaurant" });
+            Users.Add(new User { Id = 3, Username = "courier1", Password = "123", Role = "Courier" });
 
-            Restaurants.Add(new Restaurant { Id = 1, Name = "Turkebab", Address = "Azenes iela 5" });
-            Foods.Add(new Food { Id = 1, RestaurantId = 1, Name = "Ankara Kebab", Price = 8.50m });
-            Foods.Add(new Food { Id = 2, RestaurantId = 1, Name = "Durum", Price = 6.00m });
+            Restaurants.Add(new Restaurant { Id = 2, Name = "Turkebab", Address = "Azenes iela 5" });
+            Foods.Add(new Food { Id = 1, RestaurantId = 2, Name = "Ankara Kebab", Price = 8.50m });
+            Foods.Add(new Food { Id = 2, RestaurantId = 2, Name = "Durum", Price = 6.00m });
 
         }
     }

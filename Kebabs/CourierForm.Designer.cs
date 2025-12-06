@@ -43,8 +43,8 @@
             lblStatus = new Label();
             lblDeliveryId = new Label();
             panelActions = new Panel();
-            btnPickUp = new Button();
             btnDelivered = new Button();
+            btnPickUp = new Button();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitMain).BeginInit();
             splitMain.Panel1.SuspendLayout();
@@ -86,6 +86,7 @@
             btnLogout.TabIndex = 1;
             btnLogout.Text = "Log Out";
             btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
             // 
             // lblCourierWelcome
             // 
@@ -139,6 +140,7 @@
             dgvDeliveries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDeliveries.Size = new Size(976, 274);
             dgvDeliveries.TabIndex = 0;
+            dgvDeliveries.SelectionChanged += dgvDeliveries_SelectionChanged;
             // 
             // grpDeliveryDetails
             // 
@@ -221,15 +223,6 @@
             panelActions.Size = new Size(976, 80);
             panelActions.TabIndex = 0;
             // 
-            // btnPickUp
-            // 
-            btnPickUp.Location = new Point(773, 42);
-            btnPickUp.Name = "btnPickUp";
-            btnPickUp.Size = new Size(94, 29);
-            btnPickUp.TabIndex = 0;
-            btnPickUp.Text = "Pick Up";
-            btnPickUp.UseVisualStyleBackColor = true;
-            // 
             // btnDelivered
             // 
             btnDelivered.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -239,6 +232,17 @@
             btnDelivered.TabIndex = 2;
             btnDelivered.Text = "Delivered";
             btnDelivered.UseVisualStyleBackColor = true;
+            btnDelivered.Click += btnDelivered_Click;
+            // 
+            // btnPickUp
+            // 
+            btnPickUp.Location = new Point(773, 42);
+            btnPickUp.Name = "btnPickUp";
+            btnPickUp.Size = new Size(94, 29);
+            btnPickUp.TabIndex = 0;
+            btnPickUp.Text = "Pick Up";
+            btnPickUp.UseVisualStyleBackColor = true;
+            btnPickUp.Click += btnPickUp_Click;
             // 
             // CourierForm
             // 
@@ -252,6 +256,7 @@
             Name = "CourierForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kebabs Delivery - Courier Panel";
+            Load += CourierForm_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             splitMain.Panel1.ResumeLayout(false);

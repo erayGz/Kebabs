@@ -100,9 +100,25 @@ namespace Kebabs
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AppSession.CurrentUser = null;
-            var loginForm = new Kebabs();
-            loginForm.Show();
-            this.Close();
+
+            //Find login form from open forms
+            var loginForm = Application.OpenForms
+                .OfType<Kebabs>()
+                .FirstOrDefault();
+
+            if (loginForm != null)
+            {
+                loginForm.ClearLoginFields();   //Delete username and password
+                loginForm.Show();               //Bring back to login form
+            }
+            else
+            {
+                //if we dont have any login form open a new login form
+                var newLogin = new Kebabs();
+                newLogin.Show();
+            }
+
+            this.Close();   // Close the form we are using
         }
 
         private void dgvOrders_SelectionChanged(object sender, EventArgs e)
