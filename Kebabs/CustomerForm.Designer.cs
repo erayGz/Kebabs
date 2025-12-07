@@ -37,6 +37,9 @@ namespace Kebabs
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             panelHeader = new Panel();
             btnLogout = new Button();
             lblWelcome = new Label();
@@ -59,6 +62,9 @@ namespace Kebabs
             lblTotalAmount = new Label();
             lblTotalText = new Label();
             dgvCart = new DataGridView();
+            grpMyOrders = new GroupBox();
+            btnRefreshOrders = new Button();
+            dgvMyOrders = new DataGridView();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitMain).BeginInit();
             splitMain.Panel1.SuspendLayout();
@@ -77,6 +83,8 @@ namespace Kebabs
             grpCart.SuspendLayout();
             panelCartBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCart).BeginInit();
+            grpMyOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvMyOrders).BeginInit();
             SuspendLayout();
             // 
             // panelHeader
@@ -184,7 +192,7 @@ namespace Kebabs
             dgvRestaurants.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvRestaurants.RowHeadersWidth = 51;
             dgvRestaurants.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRestaurants.Size = new Size(338, 400);
+            dgvRestaurants.Size = new Size(338, 330);
             dgvRestaurants.TabIndex = 1;
             // 
             // lblRestaurantsInfo
@@ -404,12 +412,67 @@ namespace Kebabs
             dgvCart.Size = new Size(661, 200);
             dgvCart.TabIndex = 0;
             // 
+            // grpMyOrders
+            // 
+            grpMyOrders.Controls.Add(btnRefreshOrders);
+            grpMyOrders.Controls.Add(dgvMyOrders);
+            grpMyOrders.Location = new Point(3, 437);
+            grpMyOrders.Name = "grpMyOrders";
+            grpMyOrders.Size = new Size(336, 280);
+            grpMyOrders.TabIndex = 3;
+            grpMyOrders.TabStop = false;
+            grpMyOrders.Text = "My Orders";
+            // 
+            // btnRefreshOrders
+            // 
+            btnRefreshOrders.Location = new Point(235, 253);
+            btnRefreshOrders.Name = "btnRefreshOrders";
+            btnRefreshOrders.Size = new Size(94, 29);
+            btnRefreshOrders.TabIndex = 1;
+            btnRefreshOrders.Text = "Refresh Orders";
+            btnRefreshOrders.UseVisualStyleBackColor = true;
+            btnRefreshOrders.Click += btnRefreshOrders_Click;
+            // 
+            // dgvMyOrders
+            // 
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.Control;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            dgvMyOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dgvMyOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = SystemColors.Window;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+            dgvMyOrders.DefaultCellStyle = dataGridViewCellStyle11;
+            dgvMyOrders.Location = new Point(0, 26);
+            dgvMyOrders.Name = "dgvMyOrders";
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.Control;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dgvMyOrders.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dgvMyOrders.RowHeadersWidth = 51;
+            dgvMyOrders.Size = new Size(329, 221);
+            dgvMyOrders.TabIndex = 0;
+            // 
             // CustomerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1006, 754);
+            Controls.Add(grpMyOrders);
             Controls.Add(splitMain);
             Controls.Add(panelHeader);
             Font = new Font("Segoe UI", 9F);
@@ -441,6 +504,8 @@ namespace Kebabs
             panelCartBottom.ResumeLayout(false);
             panelCartBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCart).EndInit();
+            grpMyOrders.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvMyOrders).EndInit();
             ResumeLayout(false);
         }
 
@@ -468,5 +533,8 @@ namespace Kebabs
         private Button btnConfirmOrder;
         private Label lblTotalAmount;
         private Label lblTotalText;
+        private GroupBox grpMyOrders;
+        private Button btnRefreshOrders;
+        private DataGridView dgvMyOrders;
     }
 }

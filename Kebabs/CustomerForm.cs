@@ -55,6 +55,22 @@ namespace Kebabs
             lblTotalAmount.Text = $"{total:0.00} €";
         }
 
+        private void LoadMyOrders()
+        {
+            var myOrders = InMemoryDatabase.Orders.Where(o => o.CustomerId == _currentUser.Id).Select(
+                o => new
+                {
+                    OrderId = o.Id,
+                    Restaurant = InMemoryDatabase.Restaurants.FirstOrDefault(r => r.Id == o.RestaurantId)?.Name ?? "-",
+                    Status = o.Status
+                }).ToList();
+
+            dgvMyOrders.AutoGenerateColumns = true;
+            dgvMyOrders.DataSource = myOrders;
+
+            dgvMyOrders.ClearSelection();
+        }
+
         public CustomerForm(User user)
         {
             InitializeComponent();
@@ -68,6 +84,7 @@ namespace Kebabs
 
             var restaurants = _restaurantService.GetRestaurants();
             dgvRestaurants.DataSource = restaurants;
+            LoadMyOrders();
             ShowOrderNotifications();
 
             dgvRestaurants.AutoGenerateColumns = false;
@@ -200,6 +217,11 @@ namespace Kebabs
             }
 
             this.Close();   // Close the form we are using
+        }
+
+        private void btnRefreshOrders_Click(object sender, EventArgs e)
+        {
+            LoadMyOrders();
         }
     }
 }

@@ -62,16 +62,15 @@ namespace Kebabs
                 case "Courier":
                     nextForm = new CourierForm(user);
                     break;
+                case "Admin":
+                    nextForm = new AdminForm(user);
+                    break;
                 default:
                     MessageBox.Show("Unknown user role: " + user.Role);
                     return;
             }
-
-
-
             this.Hide();
             nextForm.Show();
-
         }
 
         private void Kebabs_Load(object sender, EventArgs e)
