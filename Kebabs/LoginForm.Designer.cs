@@ -93,6 +93,7 @@
             lnkForgetPw.TabIndex = 8;
             lnkForgetPw.TabStop = true;
             lnkForgetPw.Text = "I Forget Password";
+            lnkForgetPw.LinkClicked += lnkForgetPw_LinkClicked;
             // 
             // btnRegister
             // 

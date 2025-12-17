@@ -108,5 +108,14 @@ namespace Kebabs
         {
             txtPassword.UseSystemPasswordChar = true;  // hide password
         }
+
+        private void lnkForgetPw_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var resetForm = new ResetPasswordForm())
+            {
+                resetForm.ShowDialog(this);
+            }
+        }
+
     }
 }
